@@ -1,6 +1,5 @@
 package cibertec.com.pe.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -28,7 +27,6 @@ public class UsuarioServiceImpl implements UsuarioService {
 		//GUARDAR DATOS EN BASE DE DATOS
 		usuarioRepository.save(usuarioEntity);
 	}
-
 	@Override
 	public boolean validarUsuario(UsuarioEntity usuarioEntity) {
 		// TODO Auto-generated method stub
