@@ -35,15 +35,13 @@ public class UsuarioController {
     @PostMapping("/registrar_usuario")
     public String registrarUsuario(@ModelAttribute("usuario") UsuarioEntity usuarioFormulario, Model model,
             @RequestParam("foto") MultipartFile foto) {
-        try {
             usuarioService.crearUsuario(usuarioFormulario, foto);
-            model.addAttribute("registroCorrecto", "Usuario registrado correctamente.");
-        } catch (Exception e) {
-            model.addAttribute("error", "Error al registrar el usuario: " + e.getMessage());
-        }
+            
         return "registrar_usuario";
     }
-
+    
+    
+    
     @GetMapping("/")
     public String login(Model model) {
         model.addAttribute("usuario", new UsuarioEntity());
@@ -62,4 +60,10 @@ public class UsuarioController {
         model.addAttribute("usuario", new UsuarioEntity());
         return "login";
     }
+    
+    @GetMapping("/logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "redirect:/";
+	}
 }

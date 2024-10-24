@@ -36,7 +36,7 @@ public class ProductoController {
 		
 		List<ProductoEntity>listarProductos = productoService.buscarTodosProductos();
 		model.addAttribute("producto", listarProductos);
-		return "menu";
+		return "/menu";
 	}
 	
 }

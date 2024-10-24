@@ -14,7 +14,16 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 	
 	private UsuarioRepository usuarioRepository;
-	
+	public UsuarioRepository getUsuarioRepository() {
+		return usuarioRepository;
+	}
+	public void setUsuarioRepository(UsuarioRepository usuarioRepository) {
+		this.usuarioRepository = usuarioRepository;
+	}
+	public UsuarioServiceImpl(UsuarioRepository usuarioRepository) {
+		super();
+		this.usuarioRepository = usuarioRepository;
+	}
 	@Override
 	public void crearUsuario(UsuarioEntity usuarioEntity, MultipartFile foto) {
 		String nombreFoto = Utilitarios.guardarImagen(foto);
@@ -39,15 +48,11 @@ public class UsuarioServiceImpl implements UsuarioService {
 		}
 return true;
 	}
-	public UsuarioRepository getUsuarioRepository() {
-		return usuarioRepository;
-	}
-	public void setUsuarioRepository(UsuarioRepository usuarioRepository) {
-		this.usuarioRepository = usuarioRepository;
-	}
-	public UsuarioServiceImpl(UsuarioRepository usuarioRepository) {
-		super();
-		this.usuarioRepository = usuarioRepository;
+	
+	@Override
+	public UsuarioEntity buscarUsuarioPorCorreo(String correo) {
+		// TODO Auto-generated method stub
+		return usuarioRepository.findByCorreo(correo);
 	}
 
 }

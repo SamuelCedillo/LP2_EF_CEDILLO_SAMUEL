@@ -12,7 +12,13 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ProductoServiceImpl implements ProductoService{
 
-	private ProductoRepository productoRepository;
+	private final ProductoRepository productoRepository;
+	
+	public ProductoServiceImpl(ProductoRepository productoRepository) {
+		super();
+		this.productoRepository = productoRepository;
+	}
+
 	@Override
 	public List<ProductoEntity> buscarTodosProductos() {
 		// TODO Auto-generated method stub
