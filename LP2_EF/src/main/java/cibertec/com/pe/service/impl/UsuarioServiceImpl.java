@@ -28,9 +28,16 @@ public class UsuarioServiceImpl implements UsuarioService {
 		usuarioRepository.save(usuarioEntity);
 	}
 	@Override
-	public boolean validarUsuario(UsuarioEntity usuarioEntity) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean validarUsuario(UsuarioEntity usuarioFormulario) {
+		UsuarioEntity usuarioEncontrado = usuarioRepository.findByCorreo(usuarioFormulario.getCorreo());
+		
+		if(usuarioEncontrado == null) {
+			return false;
+		}
+		if (Utilitarios.checkPassword(usuarioFormulario.getPassword(), usuarioEncontrado.getPassword())) {
+			return false;
+		}
+return true;
 	}
 
 }

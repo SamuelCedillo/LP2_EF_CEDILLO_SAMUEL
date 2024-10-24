@@ -30,4 +30,11 @@ public String registrarUsuario(@ModelAttribute("usuario") UsuarioEntity usuarioF
 	usuarioService.crearUsuario(usuarioFormulario, foto);
 	return "registrar_usuario";
 }
+
+@GetMapping("/")
+public String login(org.springframework.ui.Model model) {
+    model.addAttribute("usuario",new UsuarioEntity());
+    return "login";
+}
+
 }
