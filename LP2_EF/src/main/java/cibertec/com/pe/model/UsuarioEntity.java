@@ -34,7 +34,7 @@ private String correo;
 	private String apellidos;
 	
 	
-	@Column(name = "fecha_nacimiento", nullable = false)
+	@Column(name = "fecha_nacimiento")
 	private Date fechaNacimiento;
 	
 	@Column(name = "url_imagen")
