@@ -19,6 +19,14 @@ public class UsuarioServiceImpl implements UsuarioService {
 	@Override
 	public void crearUsuario(UsuarioEntity usuarioEntity, MultipartFile foto) {
 		String nombreFoto = Utilitarios.guardarImagen(foto);
+		usuarioEntity.setUrlImagen(nombreFoto);
+		
+		//extraer password HASH
+		String password = Utilitarios.extraerHash(usuarioEntity.getPassword());
+		usuarioEntity.setPassword(password);
+		
+		//GUARDAR DATOS EN BASE DE DATOS
+		usuarioRepository.save(usuarioEntity);
 	}
 
 	@Override
