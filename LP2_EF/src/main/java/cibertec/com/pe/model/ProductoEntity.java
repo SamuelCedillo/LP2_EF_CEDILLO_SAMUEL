@@ -22,7 +22,6 @@ import lombok.Setter;
 @NoArgsConstructor
 public class ProductoEntity {
 	@Id
-	@Column(name = "producto_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 private Integer productoId;
 	

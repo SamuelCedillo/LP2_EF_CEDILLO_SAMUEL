@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 
 import cibertec.com.pe.model.ProductoEntity;
 import cibertec.com.pe.service.ProductoService;
+import cibertec.com.pe.service.UsuarioService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,25 +19,33 @@ import org.thymeleaf.engine.AttributeName;
 @RequiredArgsConstructor
 public class ProductoController {
 	private final ProductoService productoService;
+	private final UsuarioService usuarioService;
 	
+	public UsuarioService getUsuarioService() {
+		return usuarioService;
+	}
+
+
+	public ProductoController(ProductoService productoService, UsuarioService usuarioService) {
+		super();
+		this.productoService = productoService;
+		this.usuarioService = usuarioService;
+	}
+
+
 	public ProductoService getProductoService() {
 		return productoService;
 	}
 
-	public ProductoController(ProductoService productoService) {
-		super();
-		this.productoService = productoService;
-	}
 
 	@GetMapping("/menu")
 	public String mostrarMenu(Model model, HttpSession session) {
 		if (session.getAttribute("usuario") == null) {
-			return "redirect:/";
+			return "redirect:";
 		}
 		
 		List<ProductoEntity>listarProductos = productoService.buscarTodosProductos();
-		model.addAttribute("producto", listarProductos);
+		model.addAttribute("productos", listarProductos);
 		return "/menu";
 	}
-	
 }

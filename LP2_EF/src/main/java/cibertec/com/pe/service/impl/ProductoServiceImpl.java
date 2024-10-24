@@ -14,6 +14,10 @@ public class ProductoServiceImpl implements ProductoService{
 
 	private final ProductoRepository productoRepository;
 	
+	public ProductoRepository getProductoRepository() {
+		return productoRepository;
+	}
+
 	public ProductoServiceImpl(ProductoRepository productoRepository) {
 		super();
 		this.productoRepository = productoRepository;
@@ -31,4 +35,5 @@ public class ProductoServiceImpl implements ProductoService{
 		return productoRepository.findById(id).get();
 	}
 
+	
 }
