@@ -42,6 +42,17 @@ private Integer productoId;
 	@Column(name = "url_imagen")
 	private String urlImagen;
 
+	public ProductoEntity(Integer productoId, String nombreProducto, Double precioProducto, Integer stock,
+			String categoria, String urlImagen) {
+		super();
+		this.productoId = productoId;
+		this.nombreProducto = nombreProducto;
+		this.precioProducto = precioProducto;
+		this.stock = stock;
+		this.categoria = categoria;
+		this.urlImagen = urlImagen;
+	}
+
 	public Integer getProductoId() {
 		return productoId;
 	}
@@ -90,14 +101,9 @@ private Integer productoId;
 		this.urlImagen = urlImagen;
 	}
 
-	public ProductoEntity(Integer productoId, String nombreProducto, Double precioProducto, Integer stock,
-			String categoria, String urlImagen) {
+	public ProductoEntity() {
 		super();
-		this.productoId = productoId;
-		this.nombreProducto = nombreProducto;
-		this.precioProducto = precioProducto;
-		this.stock = stock;
-		this.categoria = categoria;
-		this.urlImagen = urlImagen;
 	}
+	
+	
 }

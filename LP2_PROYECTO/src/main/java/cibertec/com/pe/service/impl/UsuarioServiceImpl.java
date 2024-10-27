@@ -26,29 +26,38 @@ public class UsuarioServiceImpl implements UsuarioService {
 	}
 	@Override
 	public void crearUsuario(UsuarioEntity usuarioEntity, MultipartFile foto) {
+		//1. Guardar la foto
 		String nombreFoto = Utilitarios.guardarImagen(foto);
 		usuarioEntity.setUrlImagen(nombreFoto);
 		
-		//extraer password HASH
-		String password = Utilitarios.extraerHash(usuarioEntity.getPassword());
-		usuarioEntity.setPassword(password);
+		//2. Extraer el hash del password
+		String passwordHash = Utilitarios.extraerHash(usuarioEntity.getPassword());
+		usuarioEntity.setPassword(passwordHash);
 		
-		//GUARDAR DATOS EN BASE DE DATOS
+		//3. guardar en la base de datos
 		usuarioRepository.save(usuarioEntity);
+		
 	}
+
 	@Override
 	public boolean validarUsuario(UsuarioEntity usuarioFormulario) {
-		UsuarioEntity usuarioEncontrado = usuarioRepository.findByCorreo(usuarioFormulario.getCorreo());
+		//1. Buscar correo en base de datos
+			UsuarioEntity usuarioEncontrado = usuarioRepository
+					.findByCorreo(usuarioFormulario.getCorreo());
 		
-		if(usuarioEncontrado == null) {
-			return false;
-		}
-		if (Utilitarios.checkPassword(usuarioFormulario.getPassword(), usuarioEncontrado.getPassword())) {
-			return false;
-		}
-return true;
+		// 2. Correo existe
+			if(usuarioEncontrado == null) {
+				return false;
+			}
+		// 3. Validar si el password del formulario hace match con el hash de la base de datos
+			if(!Utilitarios.checkPassword(usuarioFormulario.getPassword(),
+					usuarioEncontrado.getPassword())) {
+				return false;
+			}
+
+		return true;
 	}
-	
+
 	@Override
 	public UsuarioEntity buscarUsuarioPorCorreo(String correo) {
 		// TODO Auto-generated method stub

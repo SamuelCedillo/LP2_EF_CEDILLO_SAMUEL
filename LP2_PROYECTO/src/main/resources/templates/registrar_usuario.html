@@ -7,10 +7,13 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+  <link rel="stylesheet" href = "../static/css/login.css">
 
-    <title>Hello, world!</title>
+    <title>Registrar usuario</title>
 </head>
 <body>
+    <img class="fondo-login" alt="" src="../static/img/FONDO LOGIN.jpg">
+
     <div class="container">
         <div th:if="${registroCorrecto}" class="alert alert-success mt-4" role="alert">
             <span th:text="${registroCorrecto}"></span>

@@ -1,13 +1,17 @@
 package cibertec.com.pe.model;
 
+import java.time.LocalDate;
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,23 +19,24 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table
+@Table(name = "tb_pedido")
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
-public class DetallePedidoEntity {
+@NoArgsConstructor
+public class PedidoEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "detalle_id")
-	private Integer detalleId;
+	@Column(name = "pedido_id",nullable = false)
+	private Integer pedidoId;
 	
-	@Column(name="cantidad", nullable = false)
-	private Integer cantidad;
+	@Column(name = "fecha_compra")
+	private LocalDate fechaCompra;
 	
 	@ManyToOne
-	@JoinColumn(name ="fk_producto", nullable=false)
-	private ProductoEntity productoEntity;
+	@JoinColumn(name = "fk_usuario", nullable = false)
+	private UsuarioEntity usuarioEntity;
 	
-	
+	@OneToMany(mappedBy = "pedidoEntity",cascade = CascadeType.ALL )
+	private List<DetallePedidoEntity>detallePedido;
 }
